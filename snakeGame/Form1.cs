@@ -49,7 +49,37 @@ namespace snakeGame
 
         private void GenerateTarget()
         {
+            //random generating
+            int maxXPosition = pbCanvas.Size.Width / GameSession.Width;
+            int maxYPosition = pbCanvas.Size.Height / GameSession.Height;
 
+            Random random = new Random();
+            target = new Snake { X = random.Next(0, maxXPosition), Y = random.Next(0, maxYPosition) };
+        }
+
+        void ScreenUpdate()
+        {
+            //checking if game is over..
+            if(GameSession.GameOver)
+            {
+                if(Input.Keypressed(Keys.Enter))
+                {
+                    StartGame();
+                }
+            }
+            else
+            {
+                if (Input.Keypressed(Keys.Right) && GameSession.direction != Direction.Left)
+                    GameSession.direction = Direction.Right;
+                else if(Input.Keypressed(Keys.Left) && GameSession.direction != Direction.Right)
+                    GameSession.direction = Direction.Left;
+                else if (Input.Keypressed(Keys.Up) && GameSession.direction != Direction.Down)
+                    GameSession.direction = Direction.Up;
+                else if (Input.Keypressed(Keys.Down) && GameSession.direction != Direction.Up)
+                    GameSession.direction = Direction.Down;
+
+                PlayerMoveMent();
+            }
         }
         private void Form1_Load(object sender, EventArgs e)
         {

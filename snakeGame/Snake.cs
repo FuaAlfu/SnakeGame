@@ -8,5 +8,14 @@ namespace snakeGame
 {
     class Snake
     {
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        //default constrauctor..
+        public Snake()
+        {
+            X = 0;
+            Y = 0;
+        }
     }
 }
